@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MVPpractice</string>
+    <string name="title_activity_successful">SuccessfulActivity</string>
 </resources>
