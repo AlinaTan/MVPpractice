@@ -10,10 +10,19 @@
         android:id="@+id/startTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="164dp"
+        android:text="Start Timer"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="172dp"
-        android:text="Button" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/setTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/startTimer"
+        android:layout_marginBottom="78dp"
+        android:text="Set Timer" />
 
     <EditText
         android:id="@+id/textTimer"

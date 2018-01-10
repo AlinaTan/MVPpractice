@@ -12,6 +12,7 @@ import alina.mvppractice.presenter.TimerManager;
 public class MainActivity extends AppCompatActivity {
 
     public Button startTimer;
+    public Button setTimer;
     public EditText textTimer;
 
     @Override
@@ -23,13 +24,20 @@ public class MainActivity extends AppCompatActivity {
 
         /* Initialise Views */
         startTimer = (Button) findViewById(R.id.startTimer);
+        setTimer = (Button) findViewById(R.id.setTimer);
         textTimer = (EditText) findViewById(R.id.textTimer);
+
+        setTimer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                timerManager.setCountdown(Integer.parseInt(textTimer.getText().toString()));
+                textTimer.setText("Set Time!");
+            }
+        });
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Hardcoded First
-                //timerManager.setCountdown(100);
-                timerManager.setText();
+                timerManager.countdown(timerManager.timer);
+                textTimer.setText(timerManager.getTimeLeft());
             }
         });
     }

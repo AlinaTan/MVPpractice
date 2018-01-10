@@ -16,37 +16,27 @@ import alina.mvppractice.view.MainActivity;
 
 public class TimerManager {
 
-    TimerModel timer = new TimerModel();
-
-    Context mainActivityContext;
-    public TimerManager (Context mainActivityContext){
-        this.mainActivityContext = mainActivityContext;
-    }
+    public TimerModel timer = new TimerModel();
 
     public TimerManager(){
         timer = new TimerModel();
     }
 
     public void setCountdown(int secs){
-        /* This is a null object reference */
-        EditText textTimer =  (EditText)((Activity)mainActivityContext).findViewById(R.id.textTimer);
         timer.setTimer(secs);
-        textTimer.setText(timer.getTimer());
     }
 
-    public void setText(){
-        EditText textTimer = (EditText)((Activity)mainActivityContext).findViewById(R.id.textTimer);
-        textTimer.setText("Hello");
+    public String getTimeLeft(){
+        return String.format("%d", timer.getTimer());
     }
 
     public void countdown(TimerModel timer){
-        EditText textTimer =  (EditText)((Activity)mainActivityContext).findViewById(R.id.textTimer);
         while (!timer.timerDone()){
             timer.setTimer(timer.getTimer()-1);
-            textTimer.setText(timer.getTimer());
         }
-        textTimer.setText("Timer Done!");
     }
+
+
 
 
 
