@@ -7,30 +7,21 @@
     tools:context="alina.mvppractice.view.MainActivity">
 
     <Button
-        android:id="@+id/startTimer"
+        android:id="@+id/sendRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="164dp"
-        android:text="Start Timer"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/setTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/startTimer"
-        android:layout_marginBottom="78dp"
-        android:text="Set Timer" />
+        android:text="Send Request" />
 
     <EditText
-        android:id="@+id/textTimer"
+        android:id="@+id/nameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/startTimer"
+        android:layout_above="@+id/sendRequest"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="67dp"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="textPersonName" />
 </RelativeLayout>
