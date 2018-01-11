@@ -2,6 +2,7 @@ package alina.mvppractice.presenter;
 
 
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.List;
 
@@ -36,7 +37,8 @@ public class PokeManager {
         call.enqueue(new Callback<Pokemon>() {
             @Override
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                //The problem is here
+                // The problem is here
+                Log.d("tag", "response is:" + response.body());
                 /*Intent resultIntent = new Intent();
                 resultIntent.putExtra("name", response.body().getPokemonName());*/
                 //pokemon = response.body();
