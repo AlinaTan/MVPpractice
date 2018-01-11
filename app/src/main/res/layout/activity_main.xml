@@ -10,18 +10,29 @@
         android:id="@+id/sendRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Send Request"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="164dp"
-        android:text="Send Request" />
+        android:layout_marginBottom="17dp" />
 
     <EditText
-        android:id="@+id/nameInput"
+        android:id="@+id/idInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:layout_above="@+id/sendRequest"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginBottom="36dp"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:id="@+id/pokemonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/idInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="156dp"
+        android:text="Pokemon Name" />
+
 </RelativeLayout>

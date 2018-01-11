@@ -4,7 +4,7 @@ package alina.mvppractice.model;
  * Created by Alina on 9/1/2018.
  */
 
-public class PokemonType {
+public class Pokemon {
 
     private String name;
 
@@ -12,7 +12,7 @@ public class PokemonType {
         return this.name;
     }
 
-    public PokemonType getPokemon(){
+    public Pokemon getPokemon(){
         return this;
     }
 }

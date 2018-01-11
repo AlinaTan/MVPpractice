@@ -1,14 +1,12 @@
 package alina.mvppractice.presenter;
 
 
-import android.widget.Toast;
+import android.content.Intent;
 
 import java.util.List;
 
 import alina.mvppractice.model.PokemonClient;
-import alina.mvppractice.model.PokemonType;
-import alina.mvppractice.view.MainActivity;
-import alina.mvppractice.view.SuccessfulActivity;
+import alina.mvppractice.model.Pokemon;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,33 +18,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class PokeManager {
-
-    private String pokemon;
-    public List<PokemonType> pokemonTypes;
     public Boolean responseFailure = false;
+    public Pokemon pokemon;
 
 
-    public void requestPokemon(String name){
-        this.pokemon = name;
+    public void requestPokemon(int id){
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl("http://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
 
         PokemonClient client = retrofit.create(PokemonClient.class);
-        Call<List<PokemonType>> call = client.typesForPokemon(pokemon);
+        Call<Pokemon> call = client.typesForPokemon(id);
 
-        call.enqueue(new Callback<List<PokemonType>>() {
+        call.enqueue(new Callback<Pokemon>() {
             @Override
-            public void onResponse(Call<List<PokemonType>> call, Response<List<PokemonType>> response) {
-                pokemonTypes = response.body();
-                responseFailure = false;
+            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                //The problem is here
+                /*Intent resultIntent = new Intent();
+                resultIntent.putExtra("name", response.body().getPokemonName());*/
+                //pokemon = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<PokemonType>> call, Throwable t) {
+            public void onFailure(Call<Pokemon> call, Throwable t) {
                 responseFailure = true;
             }
         });

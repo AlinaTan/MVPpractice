@@ -1,12 +1,13 @@
 package alina.mvppractice.view;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import alina.mvppractice.R;
@@ -14,8 +15,11 @@ import alina.mvppractice.presenter.PokeManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button sendRequest;
-    public EditText nameInput;
+    private Button sendRequest;
+    private EditText idInput;
+    private TextView pokemonName;
+
+    public String requestedPokemonName;
 
     PokeManager pokeManager = new PokeManager();
 
@@ -26,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         /* Initialise Views */
         sendRequest = (Button) findViewById(R.id.sendRequest);
-        nameInput = (EditText) findViewById(R.id.nameInput);
+        idInput = (EditText) findViewById(R.id.idInput);
+        pokemonName = (TextView) findViewById(R.id.pokemonName);
 
         sendRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                pokeManager.requestPokemon(nameInput.getText().toString());
+                pokeManager.requestPokemon(Integer.parseInt(idInput.getText().toString()));
                 Toast.makeText(getApplicationContext(), "Pokemon Sent!", Toast.LENGTH_SHORT).show();
 
                 if (pokeManager.responseFailure){
@@ -42,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            startActivity(new Intent(MainActivity.this, SuccessfulActivity.class));
+                            //Need to get the name from the PokeManager
+                            pokemonName.setText("name");
                         }
                     }, 200);
                 }
