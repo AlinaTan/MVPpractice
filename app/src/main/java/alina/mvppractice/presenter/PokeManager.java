@@ -1,14 +1,11 @@
 package alina.mvppractice.presenter;
 
 
-import android.content.Intent;
 import android.util.Log;
 
-import java.util.List;
-
+import alina.mvppractice.IMain;
 import alina.mvppractice.model.PokemonClient;
 import alina.mvppractice.model.Pokemon;
-import alina.mvppractice.view.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,15 +16,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Alina on 9/1/2018.
  */
 
-public class PokeManager {
-    public Boolean responseFailure = false;
-    public MainActivity mainActivity;
+public class PokeManager implements IMain.Presenter {
 
+    private final IMain.View mMainView;
 
-    public void requestPokemon(int id){
+    public PokeManager(IMain.View mMainView) {
+        this.mMainView = mMainView;
+    }
 
+    @Override
+    public void requestCheckVersionThenForceUpdate(int id) {
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://pokeapi.co/")
+                .baseUrl("http://pokeapi.co/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
@@ -38,22 +38,13 @@ public class PokeManager {
         call.enqueue(new Callback<Pokemon>() {
             @Override
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-
-                ResponseHandler responseHandler = ResponseHandler.getInstance();
-                responseHandler.setResponse(response.body().getPokemonName());
-                mainActivity.returnResponseToActivity(responseHandler);
-
-                //PokeManager pokeManager = PokeManager.getInstance();
-
-                //mainActivity.returnResponseToActivity(response.body().getPokemonName());
-                //Log.d("tag", "response is:" + response.body().getPokemonName());
+                mMainView.returnResponseToActivity(response);
             }
 
             @Override
             public void onFailure(Call<Pokemon> call, Throwable t) {
-                responseFailure = true;
+                Log.d("tag", "onFailure with " + t.getMessage());
             }
         });
     }
-
 }
