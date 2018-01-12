@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText idInput;
     private TextView pokemonName;
 
-    public String requestedPokemonName;
+    public String response;
 
     PokeManager pokeManager = new PokeManager();
 
@@ -47,16 +47,17 @@ public class MainActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //Need to get the name from the PokeManager
-                            pokemonName.setText("name");
+                            //Blank response from the PokeManager
+                            pokemonName.setText(response);
                         }
-                    }, 200);
+                    }, 1000);
                 }
             }
         });
+    }
 
-
-
+    public void returnResponseToActivity(String response){
+        this.response = response;
     }
 
 
