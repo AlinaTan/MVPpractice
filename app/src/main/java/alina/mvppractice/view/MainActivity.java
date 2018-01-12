@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import alina.mvppractice.R;
 import alina.mvppractice.presenter.PokeManager;
+import alina.mvppractice.presenter.ResponseHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,9 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText idInput;
     private TextView pokemonName;
 
-    public String response;
-
     PokeManager pokeManager = new PokeManager();
+    ResponseHandler response = ResponseHandler.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         sendRequest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 pokeManager.requestPokemon(Integer.parseInt(idInput.getText().toString()));
-                Toast.makeText(getApplicationContext(), "Pokemon Sent!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Request Sent!", Toast.LENGTH_SHORT).show();
 
                 if (pokeManager.responseFailure){
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -48,16 +48,17 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             //Blank response from the PokeManager
-                            pokemonName.setText(response);
+                            pokemonName.setText(response.getResponse());
+                            //Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
                         }
-                    }, 1000);
+                    }, 200);
                 }
             }
         });
     }
 
-    public void returnResponseToActivity(String response){
-        this.response = response;
+    public ResponseHandler returnResponseToActivity(ResponseHandler response){
+        return this.response = response;
     }
 
 

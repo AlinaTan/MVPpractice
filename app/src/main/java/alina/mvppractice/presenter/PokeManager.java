@@ -21,29 +21,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokeManager {
     public Boolean responseFailure = false;
-    public Pokemon pokemon;
     public MainActivity mainActivity;
 
 
     public void requestPokemon(int id){
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://pokeapi.co/")
+                .baseUrl("https://pokeapi.co/")
                 .addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
 
         PokemonClient client = retrofit.create(PokemonClient.class);
-        Call<Pokemon> call = client.typesForPokemon(id);
+        Call<Pokemon> call = client.nameOfPokemon(id);
 
         call.enqueue(new Callback<Pokemon>() {
             @Override
             public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                mainActivity.returnResponseToActivity(response.body().getPokemonName());
+
+                ResponseHandler responseHandler = ResponseHandler.getInstance();
+                responseHandler.setResponse(response.body().getPokemonName());
+                mainActivity.returnResponseToActivity(responseHandler);
+
+                //PokeManager pokeManager = PokeManager.getInstance();
+
+                //mainActivity.returnResponseToActivity(response.body().getPokemonName());
                 //Log.d("tag", "response is:" + response.body().getPokemonName());
-                /*Intent resultIntent = new Intent();
-                resultIntent.putExtra("name", response.body().getPokemonName());*/
-                //pokemon = response.body();
             }
 
             @Override
@@ -52,12 +55,5 @@ public class PokeManager {
             }
         });
     }
-
-
-
-
-
-
-
 
 }
